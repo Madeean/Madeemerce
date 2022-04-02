@@ -51,4 +51,14 @@ class SearchProduk extends Component
         return redirect()->route('belanja');
 
     }
+
+    public function hapus($id){
+        $produk = Poduk::find($id);
+        $belanjas = Belanja::where('produk_id',$id)->get();
+        foreach($belanjas as $belanja){
+            $belanja->delete();
+        }
+        $produk->delete();
+        return redirect()->route('home');
+    }
 }

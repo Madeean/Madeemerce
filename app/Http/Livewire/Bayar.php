@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Midtrans\Snap;
 use Midtrans\Config;
 use App\Models\Belanja;
+use App\Models\Poduk;
 use Livewire\Component;
 use Midtrans\Transaction;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,7 @@ class Bayar extends Component
     public $bank;
     public $transaction_status;
     public $deadline;
+    public $produk;
 
 
     public  function mount($id){
@@ -71,6 +73,11 @@ class Bayar extends Component
                 $this->transaction_status = $status['transaction_status'];
                 $transaction_time = $status['transaction_time'];
                 $this->deadline = date('Y-m-d H:i:s',strtotime('+1 day',strtotime($transaction_time)));
+
+                $this->produk = Poduk::find($this->belanja->produk_id);
+                $this->produk->stok = $this->produk->stok - 1;
+                $this->produk->update();
+
             }
         }
     }

@@ -1,7 +1,10 @@
 <div>
     <div>
         @if ($belanja->status == 1)
-            <button class="btn btn-info items-center justify-center" id="pay-button" type="button">Pay!</button>
+            <div class="flex justify-center items-center" >
+                <button class="btn btn-info" id="pay-button" type="button">Pay!</button>
+            </div>
+
         @elseif($belanja->status == 2)
         <div class="card w-full">
 
@@ -35,6 +38,7 @@
                 </table>
               </div>
         </div>
+        <a href="{{ route('home') }}" class="btn btn-accent">Back</a>
         @endif
         
 

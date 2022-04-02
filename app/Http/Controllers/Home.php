@@ -12,7 +12,8 @@ class Home extends Controller
         if(Auth::check()){
             return view('pages.index');
         }else{
-            return view('welcome');
+            $products = Poduk::all();
+            return view('welcome',compact('products'));
         }
     }
 
